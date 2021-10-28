@@ -282,7 +282,7 @@ if __name__ == '__main__':
     parser.add_argument('--output_dir', type=str, default='out')
     parser.add_argument('--periodicity', type=int, default=52)
     parser.add_argument('--n_components', type=int, default=10)
-    parser.add_argument('--max_regimes', type=int, default=1)
+    parser.add_argument('--max_regimes', type=int, default=50)
     parser.add_argument('--max_iter', type=int, default=1)
     parser.add_argument('--learning_rate', type=float, default=0.2)
     parser.add_argument('--penalty', type=float, default=0.05)
