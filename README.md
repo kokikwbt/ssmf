@@ -41,13 +41,24 @@ SSMF expects 3-dimensional `numpy.ndarray`, whose last dimension corresponds to 
 - `--update_freq`:  
     Interval of regime estimation (default: 1)
 
+## Installation
+
+You will need to install following libraries,
+
+- numpy: [https://numpy.org](https://numpy.org)
+- pandas: [https://github.com/pandas-dev/pandas](https://github.com/pandas-dev/pandas)
+- tensorly: [http://tensorly.org/stable/index.html](http://tensorly.org/stable/index.html)
+- sklearn: [https://pykalman.github.io](https://pykalman.github.io)
+- matplotlib: [https://matplotlib.org](https://matplotlib.org)
+- tqdm: [https://github.com/tqdm/tqdm](https://github.com/tqdm/tqdm)
+
 ## Datasets
 - Please download at:  
-    https://s3.amazonaws.com/tripdata/index.html
+    [https://s3.amazonaws.com/tripdata/index.html](https://s3.amazonaws.com/tripdata/index.html)
 - Please download at:  
-    https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page
+    [https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
 - Disease: data/project_tycho.csv.gz. The original data can be found at:  
-    https://www.tycho.pitt.edu/data/
+    [https://www.tycho.pitt.edu/data/](https://www.tycho.pitt.edu/data/)
 
 ## Citation
 
