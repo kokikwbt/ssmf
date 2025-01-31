@@ -255,7 +255,7 @@ class SSMF:
 
         for t in trange(self.s, n - r_test, desc='eval'):
 
-            Xc = X[..., t-self.s:t]
+            Xc = X[..., t-self.s+1:t+1]
             self.update(Xc, t)  # Algorithm 1
 
             if t % r_test == 0:

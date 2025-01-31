@@ -31,7 +31,7 @@ from copy import deepcopy
 import time
 import warnings
 import numpy as np
-from tensorly import unfolding_dot_khatri_rao
+from tensorly.cp_tensor import unfolding_dot_khatri_rao
 
 
 def ncp(M, r, tol=1e-4, maxit=500, maxT=1e+6, rw=1, verbose=False):
