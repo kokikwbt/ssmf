@@ -35,11 +35,15 @@ from tensorly.cp_tensor import unfolding_dot_khatri_rao
 
 
 def ncp(M, r, tol=1e-4, maxit=500, maxT=1e+6, rw=1, verbose=False):
+    return _ncp(M.shape, None, M, r, tol, maxit, maxT, rw, verbose)
+
+
+def _ncp(M_shape, M_indices, M, r,
+         tol=1e-4, maxit=500, maxT=1e+6, rw=1, verbose=False):
 
     # Data preprocessing and initialization
 
-    N       = M.ndim  # M is an N-way tensor
-    M_shape = M.shape  # dimensions of M
+    N       = len(M_shape)  # M is an N-way tensor
     M_norm  = np.linalg.norm(M)  # norm of M
     obj0    = .5 * M_norm ** 2  # initial objective value
 
@@ -98,8 +102,18 @@ def ncp(M, r, tol=1e-4, maxit=500, maxT=1e+6, rw=1, verbose=False):
             L0[n] = L[n]  # caution!!
             L[n]  = np.linalg.norm(Bsq)  # gradient Lipschitz constant
 
-            # Here, not using stored data in the original code
-            MB = unfolding_dot_khatri_rao(M, (None, A), n)
+            if M_indices is None:
+                MB = unfolding_dot_khatri_rao(M, (None, A), n)
+            else:
+                # Sparse MTTKRP without a dense Khatri-Rao product.
+                MB = np.zeros((M_shape[n], r))
+                for j in range(r):
+                    values = M
+                    for i in range(N):
+                        if i != n:
+                            values = values * A[i][M_indices[i], j]
+                    MB[:, j] = np.bincount(
+                        M_indices[n], weights=values, minlength=M_shape[n])
 
             # compute the gradient
             Gn = Am[n] @ Bsq - MB

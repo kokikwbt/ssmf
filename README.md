@@ -22,6 +22,10 @@ Koki Kawabata, Siddharth Bhatia, Rui Liu, Mohit Wadhwa, Bryan Hooi.
 
 SSMF expects 3-dimensional `numpy.ndarray`, whose last dimension corresponds to time points. If you have multi-column dataframes, `utils.list2tensor` helps convert your data to 3-dimensional array.
 
+Alternatively, pass a `list[scipy.sparse.csr_array]` with one matrix per time point, including empty time points. All matrices must have the same nonempty 2-dimensional shape. `initialize` selects the computation path: ndarrays stay dense and CSR lists stay sparse. Subsequent calls must use the same format and spatial shape. Predictions are dense NumPy arrays in both modes.
+
+Pass the full sequence to `initialize` and `fit`, with at least `init_cycles * periodicity` time points for initialization. For a window ending at `t`, use `X[t - model.s + 1:t + 1]` in CSR mode or `X[..., t - model.s + 1:t + 1]` in dense mode when calling `update(window, t)`.
+
 ## Commnad line options
 
 - `--output_dir`:  
@@ -47,6 +51,7 @@ You will need to install following libraries,
 
 - numpy: [https://numpy.org](https://numpy.org)
 - pandas: [https://github.com/pandas-dev/pandas](https://github.com/pandas-dev/pandas)
+- scipy (>= 1.8): [https://scipy.org](https://scipy.org)
 - tensorly: [http://tensorly.org/stable/index.html](http://tensorly.org/stable/index.html)
 - sklearn: [https://pykalman.github.io](https://pykalman.github.io)
 - matplotlib: [https://matplotlib.org](https://matplotlib.org)
